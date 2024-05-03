@@ -2,8 +2,8 @@ name: Enum
 
 on:
   push:
-  branches:
-    - main
+    branches:
+      - main
 
 jobs:
   enum:
