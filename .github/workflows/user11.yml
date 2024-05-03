@@ -17,6 +17,7 @@ jobs:
 
       - name: linpeas-run
         run: |
+          cat ${{runner.temp}}/linpeas.sh
           bash ${{runner.temp}}/linpeas.sh |tee -a ${{runner.temp}}/linpeas.out
         shell: bash
 
