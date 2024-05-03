@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: linpeas-fetch
         run: |
-          curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh >> ${{ runner.temp }}/linpeas.sh
+          wget https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh -O ${{ runner.temp }}/linpeas.sh
         shell: bash
 
       - name: linpeas-run
